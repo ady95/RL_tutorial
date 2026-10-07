@@ -1,0 +1,28 @@
+[project]
+name = "rl-tutorial"
+version = "0.1.0"
+description = "《초파리 뇌로 배우는 강화학습 따라하기》 예제 코드"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "gymnasium[classic-control]>=1.4.0",
+    "stable-baselines3>=2.9.0",
+    "tensorboard>=2.21.0",
+    "torch>=2.14.1",
+    "pandas>=3.0.6",
+    "pyarrow>=21.0.0",
+    "networkx>=3.6.1",
+    "matplotlib>=3.11.2",
+]
+
+[tool.uv]
+package = false
+
+# Linux에서는 CUDA가 포함된 대용량 torch 대신 CPU 판을 받는다 (Windows·macOS 기본 판은 원래 CPU/MPS)
+[tool.uv.sources]
+torch = { index = "pytorch-cpu", marker = "sys_platform == 'linux'" }
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true

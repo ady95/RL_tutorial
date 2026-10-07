@@ -17,16 +17,19 @@
 ```bash
 git clone https://github.com/ady95/RL_tutorial.git
 cd RL_tutorial
-python -m venv .venv
-source .venv/bin/activate     # Windows: .venv\Scripts\activate
+uv sync                       # Python 3.12 가상환경과 패키지 설치
+uv run ch02/check_env.py      # 실습 환경 점검
 ```
 
-패키지 목록(`requirements.txt`)과 환경 점검 스크립트는 실측으로 기준 버전을 확정한 뒤 추가됩니다.
+uv 설치 방법은 책의 02-1 또는 [uv 공식 문서](https://docs.astral.sh/uv/)를 참고하세요. 이 저장소는 Python 3.12 기준이며, Linux에서는 CPU용 PyTorch를 받도록 설정되어 있습니다.
 
 ## 폴더 구성
 
 | 폴더 | 책의 장 | 내용 |
 |---|---|---|
+| ch02 | 02. 실습 환경 준비 | check_env.py 환경 점검, first_game.py 첫 CartPole |
+| ch03 | 03. 게임으로 배우는 강화학습 | grid_world.py 직접 만든 Grid World, gym_api.py Gymnasium 구조, cartpole_random.py 무작위 기준선 |
+| ch04 | 04. PPO로 게임 학습시키기 | train_ppo.py 학습, evaluate.py 평가, plot_rewards.py 학습 곡선, inspect_policy.py 정책망 분석 |
 
 장을 집필하는 대로 폴더가 추가됩니다.
 

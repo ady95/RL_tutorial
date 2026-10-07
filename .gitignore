@@ -229,3 +229,4 @@ videos/
 *.pth
 *.feather
 *.parquet
+outputs/
