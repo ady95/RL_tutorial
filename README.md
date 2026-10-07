@@ -30,12 +30,13 @@ uv 설치 방법은 책의 02-1 또는 [uv 공식 문서](https://docs.astral.sh
 | ch02 | 02. 실습 환경 준비 | check_env.py 환경 점검, first_game.py 첫 CartPole |
 | ch03 | 03. 게임으로 배우는 강화학습 | grid_world.py 직접 만든 Grid World, gym_api.py Gymnasium 구조, cartpole_random.py 무작위 기준선 |
 | ch04 | 04. PPO로 게임 학습시키기 | train_ppo.py 학습, evaluate.py 평가, plot_rewards.py 학습 곡선, inspect_policy.py 정책망 분석 |
+| ch05 | 05. Connectome을 Neural Network로 보기 | download_malecns.py 데이터 받기, explore_tables.py 표 탐색, neighbors.py 연결·경로 분석, to_matrix.py 가중치 행렬 |
 
 장을 집필하는 대로 폴더가 추가됩니다.
 
 ## 필요 환경
 
-- Windows / macOS / Linux, Python 3.11 이상
+- Windows / macOS / Linux, Python 3.12
 - 1~5장은 CPU로 충분합니다. 커넥톰 전체를 학습하는 장은 GPU를 권장하며, CPU용 축소 설정을 함께 제공합니다.
 
 ## 데이터와 학습 결과물
