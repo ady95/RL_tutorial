@@ -19,7 +19,8 @@ def main():
     parser.add_argument("--env", default="FlyForage-v0")
     args = parser.parse_args()
 
-    run_dir = Path("runs") / f"forage_sb3_s{args.seed}"
+    name = "forage" if args.env == "FlyForage-v0" else args.env.removesuffix("-v0")
+    run_dir = Path("runs") / f"{name}_sb3_s{args.seed}"
     # SB3는 렌더링 방식을 주지 않으면 rgb_array를 넣으므로, 이 게임이 지원하는 ansi를 준다
     env = make_vec_env(args.env, n_envs=4, seed=args.seed, monitor_dir=str(run_dir),
                        env_kwargs={"render_mode": "ansi"})

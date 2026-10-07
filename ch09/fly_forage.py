@@ -30,11 +30,13 @@ class FlyForageEnv(gym.Env):
     metadata = {"render_modes": ["ansi"], "render_fps": 4}
 
     def __init__(self, width=7, height=8, p_food=0.3, p_obstacle=0.3, max_steps=300,
-                 obs_noise=0.0, render_mode=None):
+                 obs_noise=0.0, food_reward=1.0, crash_penalty=-1.0, survive_reward=0.01,
+                 render_mode=None):
         self.width, self.height = width, height
         self.p_food, self.p_obstacle = p_food, p_obstacle
         self.max_steps = max_steps
         self.obs_noise = obs_noise
+        self.food_reward, self.crash_penalty, self.survive_reward = food_reward, crash_penalty, survive_reward
         self.render_mode = render_mode
         self.action_space = spaces.Discrete(3)
         # [초파리 위치, 가장 가까운 먹이의 가로 거리·세로 거리, 가장 가까운 장애물의 가로 거리·세로 거리]
@@ -51,7 +53,7 @@ class FlyForageEnv(gym.Env):
     def step(self, action):
         self.fly = int(np.clip(self.fly + (action - 1), 0, self.width - 1))   # 0→-1, 1→0, 2→+1
 
-        reward, terminated = 0.01, False
+        reward, terminated = self.survive_reward, False
         for obj in self.objects:
             obj[0] += 1                                    # 한 칸 떨어진다
         landed = [o for o in self.objects if o[0] == self.height - 1]
@@ -60,10 +62,10 @@ class FlyForageEnv(gym.Env):
             if col != self.fly:
                 continue
             if kind == 1:
-                reward += 1.0
+                reward += self.food_reward
                 self.food_eaten += 1
             else:
-                reward -= 1.0
+                reward += self.crash_penalty
                 terminated = True
 
         self._spawn()
@@ -110,6 +112,10 @@ class FlyForageEnv(gym.Env):
 gym.register("FlyForage-v0", entry_point=FlyForageEnv)
 # 10장의 "새로운 맵": 더 넓고 장애물이 더 많은 판
 gym.register("FlyForageWide-v0", entry_point=FlyForageEnv, kwargs={"width": 9, "p_obstacle": 0.45})
+# 10-4의 보상 실험: 같은 게임, 다른 보상
+gym.register("FlyForageFoodOnly-v0", entry_point=FlyForageEnv, kwargs={"crash_penalty": 0.0, "survive_reward": 0.0})
+gym.register("FlyForageSafety-v0", entry_point=FlyForageEnv, kwargs={"food_reward": 0.1, "crash_penalty": -10.0})
+gym.register("FlyForageSurvive-v0", entry_point=FlyForageEnv, kwargs={"food_reward": 0.0})
 
 
 def main():

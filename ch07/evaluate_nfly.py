@@ -30,11 +30,11 @@ def load_agent_state(agent, path):
     return payload
 
 
-def build(args, env):
+def build(args, env):  # GPU로 옮긴 뒤 보정한다 (CPU 보정은 느림)
     if args.model == "mlp":
         return MLPReference(env.observation_space, env.action_space, 64)
     conn = select_subset(load_malecns(args.data, min_syn=3), args.subset)
-    agent = FlyAgent.build(conn, env.observation_space, env.action_space)
+    agent = FlyAgent.build(conn, env.observation_space, env.action_space).to(args.device)
     calibrate_on(agent, get_suite("classic").make("cartpole", seed=args.seed))
     return agent
 

@@ -10,6 +10,7 @@ nfly 가상환경에서 실행한다:
   uv run --project ../nfly ch10/wiring_probe.py --variant shuffle
   uv run --project ../nfly ch10/wiring_probe.py --variant random
   uv run --project ../nfly ch10/wiring_probe.py --variant real --subset visual
+  uv run --project ../nfly ch10/wiring_probe.py --variant real --subset eye_to_dn   # 눈과 하행 뉴런만
 """
 import argparse
 import time
@@ -23,6 +24,15 @@ from nfly.connectome.base import build_connectome
 from nfly.suite import get_suite
 
 PROTECTED = ("ol_sensory", "descending_neuron")     # 입구와 출구는 지우지 않는다
+
+
+def load_subset(data, name):
+    """nfly의 부분 회로(all, brain, visual, visual_small)에 더해, 중간 회로를 모두 뺀 eye_to_dn을 만든다."""
+    conn = load_malecns(data, min_syn=3)
+    if name == "eye_to_dn":
+        keep = np.flatnonzero(conn.neurons["super_class"].isin(PROTECTED).to_numpy())
+        return conn.subset(torch.as_tensor(keep))
+    return select_subset(conn, name)
 
 
 def neuron_sign(conn):
@@ -112,7 +122,7 @@ def main():
     rng = np.random.default_rng(args.seed)
     start = time.time()
 
-    conn = select_subset(load_malecns(args.data, min_syn=3), args.subset)
+    conn = load_subset(args.data, args.subset)
     conn = make_variant(conn, args.variant, args.fraction, rng)
     env = get_suite("classic").make("cartpole", seed=args.seed)
     agent = FlyAgent.build(conn, env.observation_space, env.action_space).to(args.device)

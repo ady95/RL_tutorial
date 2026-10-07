@@ -49,7 +49,7 @@ def main():
         agent = MLPReference(venv.single_observation_space, venv.single_action_space, 64)
     else:
         conn = select_subset(load_malecns(args.data, min_syn=3), args.subset)
-        agent = FlyAgent.build(conn, venv.single_observation_space, venv.single_action_space)
+        agent = FlyAgent.build(conn, venv.single_observation_space, venv.single_action_space).to(args.device)
         calib_env = (GameSuite.finish(gym.make(args.env), args.seed, normalize_obs=False) if args.no_normalize
                      else suite.make(args.env, seed=args.seed))
         calibrate_on(agent, calib_env)
