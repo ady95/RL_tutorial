@@ -38,3 +38,7 @@ source .venv/bin/activate     # Windows: .venv\Scripts\activate
 ## 데이터와 학습 결과물
 
 커넥톰 데이터(`data/`), 학습 로그(`runs/`), 체크포인트(`checkpoints/`), 녹화 영상(`videos/`)은 용량이 커서 저장소에 포함하지 않습니다. 내려받는 방법과 생성 방법은 각 장의 본문을 참고하세요.
+
+## 라이선스
+
+이 저장소의 예제 코드는 [Apache License 2.0](LICENSE)을 따릅니다. 책 본문(위키독스)의 저작권은 저자에게 있습니다.
