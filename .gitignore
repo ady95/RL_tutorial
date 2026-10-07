@@ -218,3 +218,14 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# RL_tutorial: 데이터·학습 결과물 (용량이 커서 저장소에 포함하지 않음)
+data/
+runs/
+checkpoints/
+videos/
+*.zip
+*.pt
+*.pth
+*.feather
+*.parquet
