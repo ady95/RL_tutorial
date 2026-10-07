@@ -31,6 +31,7 @@ uv 설치 방법은 책의 02-1 또는 [uv 공식 문서](https://docs.astral.sh
 | ch03 | 03. 게임으로 배우는 강화학습 | grid_world.py 직접 만든 Grid World, gym_api.py Gymnasium 구조, cartpole_random.py 무작위 기준선 |
 | ch04 | 04. PPO로 게임 학습시키기 | train_ppo.py 학습, evaluate.py 평가, plot_rewards.py 학습 곡선, inspect_policy.py 정책망 분석 |
 | ch05 | 05. Connectome을 Neural Network로 보기 | download_malecns.py 데이터 받기, explore_tables.py 표 탐색, neighbors.py 연결·경로 분석, to_matrix.py 가중치 행렬 |
+| ch06 | 06. nfly로 초파리 Brain Agent 만들기 | inspect_agent.py 에이전트 조립·해부 (nfly 가상환경에서 uv run --project ../nfly 로 실행) |
 
 장을 집필하는 대로 폴더가 추가됩니다.
 
