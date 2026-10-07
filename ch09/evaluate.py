@@ -1,6 +1,7 @@
 """09-3, 09-5 실습: FlyForage에서 에이전트를 같은 조건으로 평가한다.
 
   uv run ch09/evaluate.py --agent random
+  uv run ch09/evaluate.py --agent stay          # 늘 정지 (left, right도 가능)
   uv run ch09/evaluate.py --agent sb3 --model runs/forage_sb3_s0/model.zip
   uv run ch09/evaluate.py --agent sb3 --model runs/forage_sb3_s0/model.zip --env FlyForageWide-v0
   uv run ch09/evaluate.py --agent sb3 --model runs/forage_sb3_s0/model.zip --noise 0.2
@@ -33,7 +34,7 @@ def run(policy, env_id, episodes, seed, noise):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--agent", choices=["random", "sb3"], required=True)
+    parser.add_argument("--agent", choices=["random", "sb3", "left", "stay", "right"], required=True)
     parser.add_argument("--model")
     parser.add_argument("--env", default="FlyForage-v0")
     parser.add_argument("--noise", type=float, default=0.0, help="관측에 더할 가우시안 잡음의 표준편차")
@@ -41,7 +42,10 @@ def main():
     parser.add_argument("--seed", type=int, default=1000)
     args = parser.parse_args()
 
-    if args.agent == "random":
+    if args.agent in ("left", "stay", "right"):
+        fixed = {"left": 0, "stay": 1, "right": 2}[args.agent]
+        policy = lambda obs: fixed                # 관측과 상관없이 늘 같은 행동
+    elif args.agent == "random":
         rng = np.random.default_rng(args.seed)
         policy = lambda obs: int(rng.integers(3))
     else:
