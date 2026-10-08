@@ -43,7 +43,11 @@ class FlyForageEnv(gym.Env):
         self.observation_space = spaces.Box(-1.0, 1.0, shape=(5,), dtype=np.float32)
 
     def reset(self, seed=None, options=None):
-        super().reset(seed=seed)
+        super().reset(seed=seed)       # self.np_random: 먹이·장애물 생성 전용
+        # 관측 잡음은 따로 둔 난수 생성기로 뽑는다. 같은 난수를 쓰면 잡음을 켜는 순간
+        # 먹이·장애물 배치까지 달라져, "잡음만 바꾼" 비교가 되지 않는다.
+        if seed is not None or not hasattr(self, "noise_rng"):
+            self.noise_rng = np.random.default_rng(None if seed is None else [seed, 1])
         self.fly = self.width // 2
         self.objects = []          # [행, 열, 종류] 종류: 1 = 먹이, -1 = 장애물
         self.steps = 0
@@ -94,7 +98,7 @@ class FlyForageEnv(gym.Env):
         fx = 2.0 * self.fly / (self.width - 1) - 1.0
         obs = np.array([fx, *self._nearest(1), *self._nearest(-1)], dtype=np.float32)
         if self.obs_noise > 0:
-            obs += self.np_random.normal(0, self.obs_noise, size=obs.shape).astype(np.float32)
+            obs += self.noise_rng.normal(0, self.obs_noise, size=obs.shape).astype(np.float32)
         return np.clip(obs, -1.0, 1.0)
 
     def _info(self):
