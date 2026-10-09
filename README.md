@@ -1,5 +1,7 @@
 # RL_tutorial
 
+<a href="https://wikidocs.net/book/21547"><img src="assets/book-cover.jpg" alt="초파리 뇌로 배우는 강화학습 따라하기 책 표지" width="300" align="right"></a>
+
 위키독스 책 《초파리 뇌로 배우는 강화학습 따라하기 — 16만 뉴런의 커넥톰으로 게임 AI 만들기》의 예제 코드 저장소입니다.
 
 - 책: [https://wikidocs.net/book/21547](https://wikidocs.net/book/21547)
