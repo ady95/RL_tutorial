@@ -4,8 +4,6 @@
 
 위키독스 책 《초파리 뇌로 배우는 강화학습 따라하기 — 16만 뉴런의 커넥톰으로 게임 AI 만들기》의 예제 코드 저장소입니다.
 
-- 책: [https://wikidocs.net/book/21547](https://wikidocs.net/book/21547)
-
 ### 책 구매
 
 - YES24: [https://www.yes24.com/product/goods/198014079](https://www.yes24.com/product/goods/198014079)
