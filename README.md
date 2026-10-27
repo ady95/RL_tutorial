@@ -6,6 +6,12 @@
 
 - 책: [https://wikidocs.net/book/21547](https://wikidocs.net/book/21547)
 
+### 책 구매
+
+- YES24: [https://www.yes24.com/product/goods/198014079](https://www.yes24.com/product/goods/198014079)
+- 교보문고: [https://ebook-product.kyobobook.co.kr/dig/epd/ebook/E000013686539](https://ebook-product.kyobobook.co.kr/dig/epd/ebook/E000013686539)
+- 위키독스: [https://wikidocs.net/book/21547](https://wikidocs.net/book/21547)
+
 ## 이 저장소로 만드는 것
 
 1. CartPole + PPO — 일반 강화학습 완주
